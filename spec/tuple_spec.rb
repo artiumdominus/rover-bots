@@ -14,5 +14,9 @@ describe Tuple do
     
     it { expect(a + b).to eq(Tuple.new(7, -6)) }
   end
+
+  context 'bad instantiation' do
+    it { expect { Tuple.new('a', 6) }.to raise_error(ArgumentError) }
+  end
 end
 

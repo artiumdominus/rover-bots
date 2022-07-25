@@ -50,8 +50,9 @@ describe Plateau do
 
   describe '#lock' do
     spot = Tuple.new(2, 4)
+    same_spot = Tuple.new(2, 4)
 
-    it { expect { subject.lock(spot) }.to change { subject.can_move_to?(spot) }.from(true).to(false) }
+    it { expect { subject.lock(spot) }.to change { subject.can_move_to?(same_spot) }.from(true).to(false) }
   end
 end
 

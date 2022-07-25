@@ -65,3 +65,12 @@ describe Orientations::West do
   end
 end
 
+describe Orientations::BY_KEY do
+  subject { Orientations::BY_KEY }
+
+  it { expect(subject['N']).to eq(Orientations::North) }
+  it { expect(subject['E']).to eq(Orientations::East) }
+  it { expect(subject['S']).to eq(Orientations::South) }
+  it { expect(subject['W']).to eq(Orientations::West) }
+  it { expect(subject['X']).to eq(nil) }
+end
