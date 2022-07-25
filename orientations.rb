@@ -1,4 +1,4 @@
-require './tuple.rb'
+require_relative './tuple.rb'
 
 module Orientations
   class Orientation < Tuple

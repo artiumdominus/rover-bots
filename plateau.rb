@@ -1,4 +1,4 @@
-require './tuple.rb'
+require_relative './tuple.rb'
 require 'set'
 
 class Plateau

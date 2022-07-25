@@ -1,5 +1,5 @@
-require './tuple.rb'
-require './orientations.rb'
+require_relative './tuple.rb'
+require_relative './orientations.rb'
 
 class Rover
   def initialize(x, y, orientation)

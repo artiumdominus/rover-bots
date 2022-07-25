@@ -51,6 +51,12 @@ Some assumptions was made about the problem:
 3. A rover will just land in the plateau and execute his instructions when the previous finish.
 
 Ruby version: `3.1.0`
+RSpec version: `3.11`
 
 How to execute the program:
 - Use the command `$ ruby main.rb`, then inform the file name (or path and name)
+
+How to test:
+- Install RSpec and use the command `$ ruby spec/specs.rb`
+- Alternatively you can use the command for each `_spec.rb` file individually: `$ ruby spec/<name>_spec.rb`
+

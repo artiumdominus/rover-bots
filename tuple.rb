@@ -7,6 +7,7 @@ class Tuple
   attr_reader :x, :y
   
   def +(other) = Tuple.new(self.x + other.x, self.y + other.y)
+  def ==(other) = (self.x == other.x) && (self.y == other.y)
   
   def to_a = [@x, @y]
 end

@@ -1,8 +1,8 @@
 # Robot squad!
 
-require './plateau.rb'
-require './rover.rb'
-require './rover/executor.rb'
+require_relative './plateau.rb'
+require_relative './rover.rb'
+require_relative './rover/executor.rb'
 
 module Main
   class WrongFormatFileError < Exception; end
