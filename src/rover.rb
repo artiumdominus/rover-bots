@@ -26,7 +26,7 @@ class Rover
   end
   
   def turn_right
-    rase NotLandedError unless plateau
+    raise NotLandedError unless plateau
 
     @orientation = orientation.right_90_degrees
   end

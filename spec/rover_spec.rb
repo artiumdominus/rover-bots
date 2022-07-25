@@ -5,86 +5,94 @@ describe Rover do
   let(:plateau) { Plateau.new(4, 4) }
   subject { Rover.new(2, 2, 'N') }
 
-  before { subject.land(plateau) }
+  context 'when landed' do
+    before { subject.land(plateau) }
 
-  describe '#turn_right' do
-    it { expect { subject.turn_right }.to change { subject.x }.by(0) }
-    it { expect { subject.turn_right }.to change { subject.y }.by(0) }
+    describe '#turn_right' do
+      it { expect { subject.turn_right }.to change { subject.x }.by(0) }
+      it { expect { subject.turn_right }.to change { subject.y }.by(0) }
 
-    context 'when done once' do
-      before { subject.turn_right }
+      context 'when done once' do
+        before { subject.turn_right }
 
-      it { expect(subject.orientation.to_s).to eq('E') }
-    end
-
-    context 'when done twice' do
-      before { 2.times { subject.turn_right } }
-
-      it { expect(subject.orientation.to_s).to eq('S') }
-    end
-
-    context 'when done three times' do
-      before { 3.times { subject.turn_right } }
-
-      it { expect(subject.orientation.to_s).to eq('W') }
-    end
-  end
-
-  describe '#turn_left' do
-    it { expect { subject.turn_right }.to change { subject.x }.by(0) }
-    it { expect { subject.turn_right }.to change { subject.y }.by(0) }
-
-    context 'when done once' do
-      before { subject.turn_left }
-
-      it { expect(subject.orientation.to_s).to eq('W') }
-    end
-
-    context 'when done twice' do
-      before { 2.times { subject.turn_left } }
-
-      it { expect(subject.orientation.to_s).to eq('S') }
-    end
-
-    context 'when done three times' do
-      before { 3.times { subject.turn_left } }
-
-      it { expect(subject.orientation.to_s).to eq('E') }
-    end
-  end
-
-  describe '#move' do
-    context 'when heading north' do
-      it { expect { subject.move }.to change { subject.y }.by(1) }
-
-      context 'when move until plateau border' do
-        it { expect { 5.times { subject.move } }.to change { subject.y }.by(2) }
+        it { expect(subject.orientation.to_s).to eq('E') }
       end
-  
-      context 'when blocked spot ahead' do
-        before { plateau.lock(Tuple.new(2, 3)) }
 
-        it { expect { subject.move }.to change { subject.y }.by(0) }
+      context 'when done twice' do
+        before { 2.times { subject.turn_right } }
+
+        it { expect(subject.orientation.to_s).to eq('S') }
+      end
+
+      context 'when done three times' do
+        before { 3.times { subject.turn_right } }
+
+        it { expect(subject.orientation.to_s).to eq('W') }
       end
     end
 
-    context 'when heading east' do
-      before { subject.turn_right }
+    describe '#turn_left' do
+      it { expect { subject.turn_right }.to change { subject.x }.by(0) }
+      it { expect { subject.turn_right }.to change { subject.y }.by(0) }
 
-      it { expect { subject.move }.to change { subject.x }.by(1) }
+      context 'when done once' do
+        before { subject.turn_left }
+
+        it { expect(subject.orientation.to_s).to eq('W') }
+      end
+
+      context 'when done twice' do
+        before { 2.times { subject.turn_left } }
+
+        it { expect(subject.orientation.to_s).to eq('S') }
+      end
+
+      context 'when done three times' do
+        before { 3.times { subject.turn_left } }
+
+        it { expect(subject.orientation.to_s).to eq('E') }
+      end
     end
 
-    context 'when heading south' do
-      before { 2.times { subject.turn_right } }
+    describe '#move' do
+      context 'when heading north' do
+        it { expect { subject.move }.to change { subject.y }.by(1) }
 
-      it { expect { subject.move }.to change { subject.y }.by(-1) }
+        context 'when move until plateau border' do
+          it { expect { 5.times { subject.move } }.to change { subject.y }.by(2) }
+        end
+    
+        context 'when blocked spot ahead' do
+          before { plateau.lock(Tuple.new(2, 3)) }
+
+          it { expect { subject.move }.to change { subject.y }.by(0) }
+        end
+      end
+
+      context 'when heading east' do
+        before { subject.turn_right }
+
+        it { expect { subject.move }.to change { subject.x }.by(1) }
+      end
+
+      context 'when heading south' do
+        before { 2.times { subject.turn_right } }
+
+        it { expect { subject.move }.to change { subject.y }.by(-1) }
+      end
+
+      context 'when heading west' do
+        before { subject.turn_left }
+
+        it { expect { subject.move }.to change { subject.x }.by(-1) }
+      end
     end
+  end
 
-    context 'when heading west' do
-      before { subject.turn_left }
-
-      it { expect { subject.move }.to change { subject.x }.by(-1) }
-    end
+  context 'when not landed' do
+    it { expect { subject.move }.to raise_error(Rover::NotLandedError) }
+    it { expect { subject.turn_right }.to raise_error(Rover::NotLandedError) }
+    it { expect { subject.turn_left }.to raise_error(Rover::NotLandedError) }
   end
 
   context 'bad instantiation' do
