@@ -4,7 +4,7 @@ require_relative './plateau.rb'
 require_relative './rover.rb'
 require_relative './rover/executor.rb'
 
-module Main
+module Console
   class WrongFormatFileError < Exception; end
 
   class << self
@@ -18,10 +18,10 @@ module Main
         plateau = read_plateau(f)
 
         read_rovers_info(f).map do |rover, commands|
-          rover.plateau = plateau
+          rover.land(plateau)
           
           begin
-            Rover::Executor.call(rover, commands)
+            Rover::Executor::call(rover, commands)
           rescue ArgumentError
             raise WrongFormatFileError
           end
@@ -63,6 +63,4 @@ module Main
     end
   end
 end
-
-Main::execute
 

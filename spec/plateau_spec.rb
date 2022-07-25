@@ -1,5 +1,5 @@
 require 'rspec/autorun'
-require_relative '../plateau.rb'
+require_relative '../src/plateau.rb'
 
 describe Plateau do
   subject { Plateau.new(4, 6) }

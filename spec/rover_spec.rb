@@ -1,11 +1,11 @@
 require 'rspec/autorun'
-require_relative '../rover.rb'
+require_relative '../src/rover.rb'
 
 describe Rover do
   let(:plateau) { Plateau.new(4, 4) }
   subject { Rover.new(2, 2, 'N') }
 
-  before { subject.plateau = plateau }
+  before { subject.land(plateau) }
 
   describe '#turn_right' do
     it { expect { subject.turn_right }.to change { subject.x }.by(0) }

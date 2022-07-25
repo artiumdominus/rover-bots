@@ -1,5 +1,5 @@
 require 'rspec/autorun'
-require_relative '../tuple.rb'
+require_relative '../src/tuple.rb'
 
 describe Tuple do
   describe '#to_a' do

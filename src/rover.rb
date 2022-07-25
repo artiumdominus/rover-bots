@@ -9,10 +9,15 @@ class Rover
     raise ArgumentError unless @orientation
   end
   
-  attr_accessor :plateau
-  attr_reader :position, :orientation
+  attr_reader :position, :orientation, :plateau
+
+  def land(plateau)
+    @plateau = plateau
+  end
   
   def move
+    raise NotLandedError unless plateau
+
     next_position = position + orientation
     
     if plateau.can_move_to?(next_position)
@@ -21,13 +26,19 @@ class Rover
   end
   
   def turn_right
+    rase NotLandedError unless plateau
+
     @orientation = orientation.right_90_degrees
   end
   
   def turn_left
+    raise NotLandedError unless plateau
+
     @orientation = orientation.left_90_degrees
   end
   
   def x = position.x  
   def y = position.y
+
+  class NotLandedError < Exception; end
 end

@@ -1,5 +1,5 @@
 require 'rspec/autorun'
-require_relative '../orientations.rb'
+require_relative '../src/orientations.rb'
 
 describe Orientations::North do
   subject { Orientations::North }
